@@ -1,0 +1,23 @@
+# Use official Python base image
+FROM python:3.10-slim
+
+# Set working directory inside the container
+WORKDIR /app
+
+# Install SQLite client 
+RUN apt-get update && apt-get install -y sqlite3
+
+# Copy tool-specific and shared files
+COPY emissions_tool.py .
+COPY ../utils.py ./utils.py
+COPY ../emissions.db ./emissions.db
+
+# Install required Python packages
+RUN pip install fastapi uvicorn
+
+# Expose the port FastAPI will run on
+EXPOSE 8002
+
+# Run the FastAPI app
+CMD ["uvicorn", "emissions_tool:app", "--host", "0.0.0.0", "--port", "8002"]
+

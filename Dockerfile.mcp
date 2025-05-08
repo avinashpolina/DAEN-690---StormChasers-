@@ -1,0 +1,23 @@
+FROM python:3.10
+
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy all necessary code files into the container
+COPY mcp_server.py .
+COPY tool_schemas.py .
+COPY utils.py .
+COPY register_tool.py .
+COPY init_query_log.py .
+
+# Optional: copy database if needed (or mount via volume)
+COPY query_log.db .
+
+EXPOSE 8000
+
+# Run the MCP server
+CMD ["uvicorn", "mcp_server:app", "--host", "0.0.0.0", "--port", "8000"]
+

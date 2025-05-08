@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  weather_tool:
+    build:
+      context: .
+      dockerfile: Dockerfile.weather
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./regional_weather.db:/app/regional_weather.db
+      - ./utils.py:/app/utils.py
+
+  emissions_tool:
+    build:
+      context: .
+      dockerfile: Dockerfile.emissions
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./emissions.db:/app/emissions.db
+      - ./utils.py:/app/utils.py
+
+  climate_financing_tool:
+    build:
+      context: .
+      dockerfile: Dockerfile.climate_financing
+    ports:
+      - "8003:8003"
+    volumes:
+      - ./adb_climate_financing.db:/app/adb_climate_financing.db
+      - ./utils.py:/app/utils.py
+
+  air_quality_tool:
+    build:
+      context: .
+      dockerfile: Dockerfile.air_quality
+    ports:
+      - "8004:8004"
+    volumes:
+      - ./air_quality_index.db:/app/air_quality_index.db
+      - ./utils.py:/app/utils.py
+
+  sector_emissions_tool:
+    build:
+      context: .
+      dockerfile: Dockerfile.sector_emissions
+    ports:
+      - "8005:8005"
+    volumes:
+      - ./sector_emissions.db:/app/sector_emissions.db
+      - ./utils.py:/app/utils.py
+
+  mcp_server:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./query_log.db:/app/query_log.db
+

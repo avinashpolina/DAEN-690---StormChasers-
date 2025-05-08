@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+requests
+python-dateutil
+vanna
+openai
+

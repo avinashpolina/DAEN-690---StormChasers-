@@ -1,0 +1,16 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y sqlite3
+
+COPY air_quality_tool.py .
+COPY ../utils.py ./utils.py
+COPY ../air_quality_index.db ./air_quality_index.db
+
+RUN pip install fastapi uvicorn
+
+EXPOSE 8004
+
+CMD ["uvicorn", "air_quality_tool:app", "--host", "0.0.0.0", "--port", "8004"]
+
