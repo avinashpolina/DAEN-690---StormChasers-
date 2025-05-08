@@ -18,15 +18,15 @@ function App() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ question: query }),
+        body: JSON.stringify({ user_input: query }), // ✅ Correct key for FastAPI backend
       });
 
       const data = await res.json();
-      const llmReply = data.choices?.[0]?.message?.content || "No response from ClimateGPT.";
+      const llmReply = data.response || "No response from ClimateGPT."; // ✅ Correct field
       setResponse(llmReply);
     } catch (error) {
       console.error("Error:", error);
-      setResponse(" Failed to connect to ClimateGPT API.");
+      setResponse("❌ Failed to connect to ClimateGPT API.");
     } finally {
       setLoading(false);
     }
@@ -34,7 +34,6 @@ function App() {
 
   return (
     <div className="relative h-screen w-full overflow-hidden">
-      {/* Background Image */}
       <img
         src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1950&q=80"
         alt="background"
@@ -44,6 +43,7 @@ function App() {
       <div className="absolute inset-0 bg-black bg-opacity-40 z-10" />
 
       <div className="relative z-20 flex flex-col items-center justify-center h-full px-4 text-white text-center">
+
         {/* Header */}
         <div className="absolute top-6 left-6 flex items-center space-x-2 text-black font-bold text-xl">
           <span>ClimateGPT 2.0</span>
@@ -62,11 +62,11 @@ function App() {
           Enhance decision making with robust climate information for researchers, policymakers, and business leaders
         </h1>
 
-        {/* Input Section */}
+        {/* Input */}
         <div className="flex w-full max-w-2xl items-center bg-white rounded-full overflow-hidden shadow-md">
           <input
             type="text"
-            placeholder="Type a climate related question to start"
+            placeholder="Type a climate-related question to start"
             className="flex-grow p-4 text-gray-800 outline-none"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -80,7 +80,6 @@ function App() {
           </button>
         </div>
 
-        {/* Subtext */}
         <p className="mt-4 text-sm text-gray-200">
           or <span className="underline">see what others are asking</span>
         </p>
@@ -88,7 +87,7 @@ function App() {
           ClimateGPT can make mistakes. Always double-check important information in its answers. <a className="underline" href="#">Learn more</a>
         </p>
 
-        {/* Response Output */}
+        {/* Response */}
         {response && (
           <div className="bg-white text-black rounded-lg mt-6 p-4 max-w-xl shadow-lg">
             <p className="text-md font-medium">Response:</p>
@@ -96,7 +95,6 @@ function App() {
           </div>
         )}
 
-        {/* Scroll Down Indicator */}
         <div className="absolute bottom-10 text-white text-sm flex flex-col items-center">
           <span className="animate-bounce text-xl">⌄</span>
           <span className="mt-1">scroll for more</span>
