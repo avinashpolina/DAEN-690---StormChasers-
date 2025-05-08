@@ -13,7 +13,7 @@ function App() {
     setResponse("");
 
     try {
-      const res = await fetch("https://climate-backend.onrender.com/query", {
+      const res = await fetch("https://9a37-66-7-153-34.ngrok-free.app/query", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
