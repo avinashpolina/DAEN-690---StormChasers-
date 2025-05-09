@@ -76,7 +76,7 @@ function App() {
             onClick={handleAsk}
             disabled={loading}
           >
-            {loading ? "..." : "🔼¸"}
+            {loading ? "..." : "🔼"}
           </button>
         </div>
 
