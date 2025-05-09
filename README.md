@@ -1,70 +1,171 @@
-# Getting Started with Create React App
+# Storm Chasers – ClimateGPT (DAEN-690 Capstone Project)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Storm Chasers – ClimateGPT is a full-stack climate intelligence system developed as part of the DAEN-690 Capstone project at George Mason University. The system enables users to ask questions related to air quality, emissions, weather patterns, and climate finance using a client-hosted Large Language Model (LLM) via Erasmus.ai. It includes a React-based frontend, a modular Python backend with tool registration, and several climate-related datasets in CSV and database formats. The system also includes Docker support for containerized deployment.
 
-## Available Scripts
+## Project Objectives
 
-In the project directory, you can run:
+- Provide an AI-powered assistant to answer complex climate-related questions
+- Integrate environmental datasets into a tool-based architecture for querying
+- Leverage Erasmus-hosted ClimateGPT for generating contextually rich answers
+- Support deployment using Docker, Vercel (frontend), and Render (backend)
 
-### `npm start`
+## Project Directory Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Daen_Final_StormChasers/
+├── backend/                        - Optional Express proxy (if used)
+│   └── server.js
+├── dean_env/                      - Python virtual environment (should be ignored in version control)
+├── csv_datasets/                  - Folder containing CSV/DB datasets
+├── public/                        - React public folder
+├── src/                           - React frontend source code
+│   ├── App.js
+│   ├── index.js
+│   ├── index.css
+├── Dockerfile.air_quality         - Dockerfile for air quality tool
+├── Dockerfile.climate_financing  - Dockerfile for climate finance tool
+├── Dockerfile.emissions          - Dockerfile for emissions tool
+├── Dockerfile.mcp                - Dockerfile for MCP server
+├── Dockerfile.sector_emissions   - Dockerfile for sector emissions tool
+├── Dockerfile.weather            - Dockerfile for weather tool
+├── docker-compose.yml            - Compose file to spin up all services
+├── ADB Climate Change Financing_merged.csv
+├── AQI_cleaned.csv
+├── Emissions_Dataset.csv
+├── carbon_monitor_global.csv
+├── emissions.db
+├── adb_climate_financing.db
+├── air_quality_index.db
+├── sector_emissions.db
+├── regional_weather.db
+├── regional_data.csv
+├── emissions_tool.py             - Tool to answer emissions-related queries
+├── air_quality_tool.py           - Tool to answer air quality questions
+├── weather_tool.py               - Tool to handle weather-based questions
+├── climate_financing_tool.py     - Tool for climate finance data access
+├── sector_emissions_tool.py      - Tool to analyze emissions by sector
+├── llm_client.py                 - Module to connect to Erasmus ClimateGPT
+├── mcp_server.py                 - Main backend routing controller
+├── register_tool.py              - Registers all tool functions with the MCP
+├── utils.py                      - Utility functions and logging
+├── init_query_log.py             - Initializes query logging database
+├── tool_schemas.py               - JSON schemas for tool input/output
+├── requirements.txt              - Python dependencies
+├── README.md                     - Project documentation (this file)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Prerequisites
 
-### `npm test`
+- Python 3.8 or higher
+- pip
+- Node.js and npm (for frontend)
+- Git
+- Vercel (for frontend deployment)
+- Render (for backend deployment)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Backend Setup (Python)
 
-### `npm run build`
+1. Create a virtual environment:
+   python3 -m venv dean_env
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Activate the environment:
+   source dean_env/bin/activate
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Install dependencies:
+   pip install -r requirements.txt
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Register all tools:
+   python register_tool.py
 
-### `npm run eject`
+5. Start the MCP server:
+   python mcp_server.py
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The MCP server will run on http://localhost:5000 and routes incoming LLM requests to the correct tool modules.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Frontend Setup (React)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Navigate to the root of the frontend folder:
+   cd Daen_Final_StormChasers
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. Install dependencies:
+   npm install
 
-## Learn More
+3. Start the development server:
+   npm start
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Frontend will be available at http://localhost:3000. You can ask questions such as:
+- "What is the AQI in Delhi?"
+- "How much carbon was emitted globally in 2020?"
+- "What is the weather pattern in region X?"
+- "Which sector emits the most greenhouse gases?"
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## API Integration – Erasmus.ai
 
-### Code Splitting
+The backend connects to the ClimateGPT API hosted at:
+https://erasmus.ai/models/climategpt_8b_latest/v1/chat/completions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The API uses HTTP Basic Auth:
+- Username: ai
+- Password: 4climate
 
-### Analyzing the Bundle Size
+These credentials are securely encoded and sent via llm_client.py.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Available Tools
 
-### Making a Progressive Web App
+- Emissions Tool: Analyzes and retrieves emissions data
+- Air Quality Tool: Provides AQI details using air_quality_index.db
+- Sector Emissions Tool: Breaks down emissions by economic sector
+- Climate Finance Tool: Answers questions from climate finance datasets
+- Weather Tool: Returns regional weather statistics
+- MCP Server: Central server routing user questions to tools
+- Erasmus LLM Client: Connects and formats data for ClimateGPT responses
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Database and CSV Files
 
-### Advanced Configuration
+| Filename                              | Type     | Description 
+|---------------------------------------|----------|-------------------------------------
+| AQI_cleaned.csv                       | CSV      | Air quality index data 
+| Emissions_Dataset.csv                 | CSV      | Annual emissions data 
+| carbon_monitor_global.csv             | CSV      | Global carbon monitoring 
+| ADBClimateChange Financing_merged.csv | CSV      | Finance dataset from Asian Development Bank 
+| regional_data.csv                     | CSV      | Region-level climate data 
+| emissions.db                          | SQLite   | Emissions database 
+| adb_climate_financing.db              | SQLite   | Finance data 
+| sector_emissions.db                   | SQLite   | Emissions by sector 
+| air_quality_index.db                  | SQLite   | AQI stored as a database 
+| regional_weather.db                   | SQLite   | Regional weather data 
+| query_log.db                          | SQLite   | Logging of queries sent to LLM 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Docker Setup
 
-### Deployment
+If Docker is installed, you can spin up all services using:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+docker-compose up --build
 
-### `npm run build` fails to minify
+Each service has its own Dockerfile for modular development. Containers can be extended or scaled as needed.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Deployment Instructions
+
+### Frontend (Vercel)
+
+1. Push your project to GitHub
+2. Visit https://vercel.com and click "New Project"
+3. Import the GitHub repo
+4. Vercel auto-detects React → Deploy
+
+### Backend (Render)
+
+1. Create an account at https://render.com
+2. Click "New Web Service"
+3. Set root directory to your backend folder
+4. Set start command: python mcp_server.py
+5. Deploy and copy the backend URL
+6. Update your React frontend to send API calls to the new backend URL
+
+## Author
+
+Sai Avinash Polina  
+Email: avinashpolina2028@gmail.com  
+GitHub: https://github.com/avinashpolina
+
+## License
+
+This project is submitted as part of the DAEN-690 Capstone Project at George Mason University. It is intended for academic demonstration purposes only.
