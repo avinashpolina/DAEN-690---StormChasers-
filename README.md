@@ -11,23 +11,24 @@ Storm Chasers – ClimateGPT is a full-stack climate intelligence system develop
 
 ## Project Directory Structure
 
+```
 Daen_Final_StormChasers/
-├── backend/                        - Optional Express proxy (if used)
+├── backend/                        # Optional Express proxy (if used)
 │   └── server.js
-├── dean_env/                      - Python virtual environment (should be ignored in version control)
-├── csv_datasets/                  - Folder containing CSV/DB datasets
-├── public/                        - React public folder
-├── src/                           - React frontend source code
+├── dean_env/                      # Python virtual environment (should be ignored in version control)
+├── csv_datasets/                  # Folder containing CSV/DB datasets
+├── public/                        # React public folder
+├── src/                           # React frontend source code
 │   ├── App.js
 │   ├── index.js
-│   ├── index.css
-├── Dockerfile.air_quality         - Dockerfile for air quality tool
-├── Dockerfile.climate_financing  - Dockerfile for climate finance tool
-├── Dockerfile.emissions          - Dockerfile for emissions tool
-├── Dockerfile.mcp                - Dockerfile for MCP server
-├── Dockerfile.sector_emissions   - Dockerfile for sector emissions tool
-├── Dockerfile.weather            - Dockerfile for weather tool
-├── docker-compose.yml            - Compose file to spin up all services
+│   └── index.css
+├── Dockerfile.air_quality         # Dockerfile for air quality tool
+├── Dockerfile.climate_financing  # Dockerfile for climate finance tool
+├── Dockerfile.emissions          # Dockerfile for emissions tool
+├── Dockerfile.mcp                # Dockerfile for MCP server
+├── Dockerfile.sector_emissions   # Dockerfile for sector emissions tool
+├── Dockerfile.weather            # Dockerfile for weather tool
+├── docker-compose.yml            # Compose file to spin up all services
 ├── ADB Climate Change Financing_merged.csv
 ├── AQI_cleaned.csv
 ├── Emissions_Dataset.csv
@@ -38,20 +39,20 @@ Daen_Final_StormChasers/
 ├── sector_emissions.db
 ├── regional_weather.db
 ├── regional_data.csv
-├── emissions_tool.py             - Tool to answer emissions-related queries
-├── air_quality_tool.py           - Tool to answer air quality questions
-├── weather_tool.py               - Tool to handle weather-based questions
-├── climate_financing_tool.py     - Tool for climate finance data access
-├── sector_emissions_tool.py      - Tool to analyze emissions by sector
-├── llm_client.py                 - Module to connect to Erasmus ClimateGPT
-├── mcp_server.py                 - Main backend routing controller
-├── register_tool.py              - Registers all tool functions with the MCP
-├── utils.py                      - Utility functions and logging
-├── init_query_log.py             - Initializes query logging database
-├── tool_schemas.py               - JSON schemas for tool input/output
-├── requirements.txt              - Python dependencies
-├── README.md                     - Project documentation (this file)
-
+├── emissions_tool.py             # Tool to answer emissions-related queries
+├── air_quality_tool.py           # Tool to answer air quality questions
+├── weather_tool.py               # Tool to handle weather-based questions
+├── climate_financing_tool.py     # Tool for climate finance data access
+├── sector_emissions_tool.py      # Tool to analyze emissions by sector
+├── llm_client.py                 # Module to connect to Erasmus ClimateGPT
+├── mcp_server.py                 # Main backend routing controller
+├── register_tool.py              # Registers all tool functions with the MCP
+├── utils.py                      # Utility functions and logging
+├── init_query_log.py             # Initializes query logging database
+├── tool_schemas.py               # JSON schemas for tool input/output
+├── requirements.txt              # Python dependencies
+└── README.md                     # Project documentation (this file)
+```
 ## Prerequisites
 
 - Python 3.8 or higher
