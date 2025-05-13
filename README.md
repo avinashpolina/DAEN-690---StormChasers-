@@ -161,11 +161,19 @@ Each service has its own Dockerfile for modular development. Containers can be e
 5. Deploy and copy the backend URL
 6. Update your React frontend to send API calls to the new backend URL
 
-## Author
+## Authors
 
 Sai Avinash Polina  
 Email: avinashpolina2028@gmail.com  
-GitHub: https://github.com/avinashpolina
+
+Bhuvan Sai Thatthari
+Email: Bhu1work@gmail.com
+
+Nimisha Menat
+Email: nimishamenat@gmail.com
+
+Akshitha Komatireddy
+Email: akomati@gmu.edu
 
 ## License
 
