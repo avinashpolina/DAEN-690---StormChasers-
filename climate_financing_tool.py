@@ -5,6 +5,7 @@ import logging
 import re
 from utils import extract_allowed_columns
 
+# Initialize FastAPI application
 app = FastAPI()
 logging.basicConfig(level=logging.INFO)
 
