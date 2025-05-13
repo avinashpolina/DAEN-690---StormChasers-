@@ -167,12 +167,15 @@ Sai Avinash Polina
 Email: avinashpolina2028@gmail.com  
 
 Bhuvan Sai Thatthari
+
 Email: Bhu1work@gmail.com
 
 Nimisha Menat
+
 Email: nimishamenat@gmail.com
 
 Akshitha Komatireddy
+
 Email: akomati@gmu.edu
 
 ## License
