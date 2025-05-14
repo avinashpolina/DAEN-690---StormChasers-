@@ -163,7 +163,8 @@ Each service has its own Dockerfile for modular development. Containers can be e
 
 ## Authors
 
-Sai Avinash Polina  
+Sai Avinash Polina 
+
 Email: avinashpolina2028@gmail.com  
 
 Bhuvan Sai Thatthari
@@ -177,6 +178,14 @@ Email: nimishamenat@gmail.com
 Akshitha Komatireddy
 
 Email: akomati@gmu.edu
+
+Sai Sahith Gabbeta 
+
+Email: Saisahith650@gmail.com
+
+Divya Atluri
+
+Email: divyaatluri3@gmail.com
 
 ## License
 
